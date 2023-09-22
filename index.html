@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta id="viewport" name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <style>
+        html,body,iframe{width: 100%;height: 100%;padding: 0;margin: 0}
+        #wrap{width: 100%;height: 100%;}
+        iframe{border: none;}
+    </style>
+</head>
+<body>
+<link rel="shortcut icon" href="favicon.ico">
+<div id="wrap">
+    <iframe id="myIframe" src="https://iframe.r18.zip:2083" allow="publickey-credentials-get *"></iframe>
+    <script>
+        //设定目标地址
+        var SetDomain = 'https://iframe.r18.zip:2083'
+        // 获取当前URL
+        var NowUrl = window.location.href;
+        //获取当前域名
+        var NowDomain = "https://"+document.domain;
+        // 将当前URL转换为子页面的URL,允许带参数跳转
+        var Url = NowUrl.replace(NowDomain, SetDomain);
+        // 替换iframe的src参数
+        document.getElementById("myIframe").src = Url;
+        // 读取iframe的信息,根据需要自行提取
+        window.addEventListener('message', function(event) {
+            var data = event.data;
+            var title = data.title;
+            var oldUrl = data.Url;
+            //重新获取一遍当前URL,防止某些bug
+            var NowUrl = window.location.href;
+            //逆向替换,实现URL同步
+            var newUrl = oldUrl.replace(SetDomain, NowDomain);
+            //同步URL,如果被替换的URL一致则不替换,防止一些奇怪的bug
+            if (NowUrl !== newUrl) {
+                history.replaceState(null, '', newUrl);
+            }
+            //顺便同步标题
+            var NowTitle = document.title
+            if (NowTitle !== title) {
+                document.title = title;
+            }
+        });
+    </script>
+    <script>
+        // 子页面代码
+        // URL变化时运行
+        // window.addEventListener('hashchange', function() {
+        //  var title = document.title;
+        //  var newUrl = window.location.href;
+        //  window.parent.postMessage({title: title, newUrl: newUrl}, '*');
+        // });
+    </script>
+</div>
+</body>
+</html>
