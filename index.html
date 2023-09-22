@@ -45,13 +45,27 @@
         });
     </script>
     <script>
-        // 子页面代码
-        // URL变化时运行
+        // 子页面脚本1,URL变化时运行,兼容性似乎不太好(比如Jellyfin就不能用)
         // window.addEventListener('hashchange', function() {
         //  var title = document.title;
         //  var newUrl = window.location.href;
         //  window.parent.postMessage({title: title, newUrl: newUrl}, '*');
         // });
+
+        //子页面脚本2
+        //触发点击事件时运行,没考虑自动变化的情况(凑合用!)
+        //function myFunction() {
+        //    var title = document.title;
+        //    var Url = window.location.href;
+        //    parent.postMessage({title: title, Url: Url}, '*');
+        //}
+        //document.addEventListener('click', function(event) {
+        //    setTimeout(function() {
+        //        myFunction();
+        //    }, 100);
+        //});
+
+        
     </script>
 </div>
 </body>
