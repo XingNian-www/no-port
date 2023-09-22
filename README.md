@@ -79,6 +79,9 @@ location = /index.html {
 
 <br/>
 
+## 广告位招商
+KFC疯狂星期四 V我50(
+
 ### 配置思路  (一堆批话,直接看index.html文件最好)
 
 众所周知,iframe可以在网页中套娃一个网页
